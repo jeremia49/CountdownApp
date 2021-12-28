@@ -127,6 +127,7 @@ class _InputandListState extends State<InputandList> {
   }
 
   Widget listViewGenerator() {
+    countdownData.sort((a, b) => b.createdAt.compareTo(a.createdAt));
     return ListView.builder(
         itemCount: countdownData.length,
         itemBuilder: (context, index) {
