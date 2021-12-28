@@ -1,6 +1,6 @@
 # countdownapp
 
-A new Flutter project.
+A new simple Flutter project. Inspired by [DPM-praktikum-3](https://github.com/jeremia49/DPM-praktikum-3)
 
 ## Getting Started
 
