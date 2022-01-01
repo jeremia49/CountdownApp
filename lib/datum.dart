@@ -6,11 +6,13 @@ part 'datum.g.dart';
 @JsonSerializable()
 class CountdownDatum {
   final String title;
-  late int duration;
+  late int targetDuration;
+  int spendDuration = 0;
   late DateTime createdAt;
   late bool done;
 
-  CountdownDatum(this.title, {this.duration = Countdown.initialTimerValue}) {
+  CountdownDatum(this.title,
+      {this.targetDuration = Countdown.initialTimerValue}) {
     createdAt = DateTime.now();
     done = false;
   }

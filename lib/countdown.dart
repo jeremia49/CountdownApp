@@ -75,7 +75,7 @@ class _TimerCountdownState extends State<TimerCountdown> {
     setState(() {
       miliDetikSaatIni += 100;
     });
-    if (miliDetikSelesai - miliDetikSaatIni == -100) {
+    if (miliDetikSelesai - miliDetikSaatIni <= 0) {
       done = true;
       timer?.cancel();
       deactivate();
@@ -132,73 +132,76 @@ class _TimerCountdownState extends State<TimerCountdown> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      child: Padding(
-        padding: const EdgeInsets.only(left: 20, right: 20),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: done
-              ? [
-                  const Text(
-                    'Selesai !',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
+      child: SafeArea(
+        minimum: EdgeInsets.all(1),
+        child: Padding(
+          padding: const EdgeInsets.only(left: 20, right: 20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: done
+                ? [
+                    const Text(
+                      'Selesai !',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    )
+                  ]
+                : [
+                    Text(
+                      clock,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 35,
+                      ),
                     ),
-                  )
-                ]
-              : [
-                  Text(
-                    clock,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 35,
+                    const SizedBox(
+                      height: 10,
                     ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  LinearProgressIndicator(
-                    value: miliDetikSaatIni / miliDetikSelesai,
-                    semanticsLabel: 'Waktu yang dibutuhkan',
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      ElevatedButton(
-                        onPressed: () => setTime(1 * 60),
-                        child: const Text('+1 min.'),
-                      ),
-                      ElevatedButton(
-                        onPressed: () => setTime(5 * 60),
-                        child: const Text('+5 min.'),
-                      ),
-                      ElevatedButton(
-                        onPressed: () => setTime(10 * 60),
-                        child: const Text('+10 min.'),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      ElevatedButton(
-                        onPressed: () => setTime(30 * 60),
-                        child: const Text('+30 min.'),
-                      ),
-                      ElevatedButton(
-                        onPressed: () => setTime(60 * 60),
-                        child: const Text('+1 hr.'),
-                      ),
-                      ElevatedButton(
-                        onPressed: () => setTime(120 * 60),
-                        child: const Text('+2 hr.'),
-                      ),
-                    ],
-                  )
-                ],
+                    LinearProgressIndicator(
+                      value: miliDetikSaatIni / miliDetikSelesai,
+                      semanticsLabel: 'Waktu yang dibutuhkan',
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        ElevatedButton(
+                          onPressed: () => setTime(1 * 60),
+                          child: const Text('+1 min.'),
+                        ),
+                        ElevatedButton(
+                          onPressed: () => setTime(5 * 60),
+                          child: const Text('+5 min.'),
+                        ),
+                        ElevatedButton(
+                          onPressed: () => setTime(10 * 60),
+                          child: const Text('+10 min.'),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        ElevatedButton(
+                          onPressed: () => setTime(30 * 60),
+                          child: const Text('+30 min.'),
+                        ),
+                        ElevatedButton(
+                          onPressed: () => setTime(60 * 60),
+                          child: const Text('+1 hr.'),
+                        ),
+                        ElevatedButton(
+                          onPressed: () => setTime(120 * 60),
+                          child: const Text('+2 hr.'),
+                        ),
+                      ],
+                    )
+                  ],
+          ),
         ),
       ),
       onWillPop: _onWillPop,

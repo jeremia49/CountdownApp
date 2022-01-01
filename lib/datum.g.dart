@@ -9,15 +9,18 @@ part of 'datum.dart';
 CountdownDatum _$CountdownDatumFromJson(Map<String, dynamic> json) =>
     CountdownDatum(
       json['title'] as String,
-      duration: json['duration'] as int? ?? Countdown.initialTimerValue,
+      targetDuration:
+          json['targetDuration'] as int? ?? Countdown.initialTimerValue,
     )
+      ..spendDuration = json['spendDuration'] as int
       ..createdAt = DateTime.parse(json['createdAt'] as String)
       ..done = json['done'] as bool;
 
 Map<String, dynamic> _$CountdownDatumToJson(CountdownDatum instance) =>
     <String, dynamic>{
       'title': instance.title,
-      'duration': instance.duration,
+      'targetDuration': instance.targetDuration,
+      'spendDuration': instance.spendDuration,
       'createdAt': instance.createdAt.toIso8601String(),
       'done': instance.done,
     };
