@@ -123,6 +123,7 @@ class _InputandListState extends State<InputandList> {
   void clearHistory() {
     setState(() {
       countdownData = <CountdownDatum>[];
+      prefs!.setString('data', jsonEncode(countdownData));
     });
   }
 
