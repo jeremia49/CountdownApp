@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'countdown.dart';
 import 'datum.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'util.dart';
 
 void main() {
   runApp(const MyApp());
@@ -134,10 +135,8 @@ class _InputandListState extends State<InputandList> {
         itemBuilder: (context, index) {
           return ListTile(
             title: Text(countdownData[index].title),
-            subtitle: Text((countdownData[index].duration / 1000).toString() +
-                "s (" +
-                countdownData[index].createdAt.toString() +
-                ")"),
+            subtitle: Text(
+                "${printDuration(Duration(seconds: (countdownData[index].duration / 1000).floor()))} ( ${countdownData[index].createdAt.toString()} )"),
             leading: countdownData[index].done
                 ? const Icon(Icons.check)
                 : const Icon(Icons.dangerous),

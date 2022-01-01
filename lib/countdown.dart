@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'datum.dart';
+import 'util.dart';
 
 class CountdownPopResult {
   final int milidetikTarget;
@@ -66,16 +67,8 @@ class _TimerCountdownState extends State<TimerCountdown> {
     return ((miliDetikSelesai - miliDetikSaatIni) / 1000).round();
   }
 
-  String _printDuration(Duration duration) {
-    //Source : https://stackoverflow.com/questions/54775097/formatting-a-duration-like-hhmmss
-    String twoDigits(int n) => n.toString().padLeft(2, "0");
-    String twoDigitMinutes = twoDigits(duration.inMinutes.remainder(60));
-    String twoDigitSeconds = twoDigits(duration.inSeconds.remainder(60));
-    return "${twoDigits(duration.inHours)}:$twoDigitMinutes:$twoDigitSeconds";
-  }
-
   String get clock {
-    return _printDuration(Duration(seconds: detikSisa));
+    return printDuration(Duration(seconds: detikSisa));
   }
 
   void tick(context) {
