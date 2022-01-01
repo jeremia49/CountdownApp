@@ -32,7 +32,7 @@ class Countdown extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              "Anda sedang melakukan " + args.data.title + " !",
+              args.data.title,
               style: const TextStyle(
                 fontSize: 15,
               ),
@@ -66,16 +66,16 @@ class _TimerCountdownState extends State<TimerCountdown> {
     return ((miliDetikSelesai - miliDetikSaatIni) / 1000).round();
   }
 
+  String _printDuration(Duration duration) {
+    //Source : https://stackoverflow.com/questions/54775097/formatting-a-duration-like-hhmmss
+    String twoDigits(int n) => n.toString().padLeft(2, "0");
+    String twoDigitMinutes = twoDigits(duration.inMinutes.remainder(60));
+    String twoDigitSeconds = twoDigits(duration.inSeconds.remainder(60));
+    return "${twoDigits(duration.inHours)}:$twoDigitMinutes:$twoDigitSeconds";
+  }
+
   String get clock {
-    int menit = (detikSisa / 60).floor();
-    int detik = detikSisa % 60;
-    return (menit.toString().length == 2
-            ? menit.toString()
-            : "0" + menit.toString()) +
-        " : " +
-        (detik.toString().length == 2
-            ? detik.toString()
-            : "0" + detik.toString());
+    return _printDuration(Duration(seconds: detikSisa));
   }
 
   void tick(context) {
